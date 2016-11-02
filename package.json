@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "compile": "tsc",
+    "example": "ts-node --project example example/Example.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,6 +16,7 @@
   "author": "Anthony Cleaver",
   "license": "ISC",
   "devDependencies": {
+    "ts-node": "^1.6.1",
     "tsc": "^1.20150623.0",
     "typescript": "^2.0.6"
   }
