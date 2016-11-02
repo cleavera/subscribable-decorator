@@ -12,5 +12,9 @@
     "subscribable"
   ],
   "author": "Anthony Cleaver",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tsc": "^1.20150623.0",
+    "typescript": "^2.0.6"
+  }
 }
