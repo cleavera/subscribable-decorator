@@ -2,6 +2,10 @@
 
 This package provides decorators for typescript that allow properties and methods to be subscribed to.
 
+# Installation
+
+```npm install subscribable-decorator --save```
+
 # Example
 
 See the example/Example.ts for a working example. ```npm run example```
