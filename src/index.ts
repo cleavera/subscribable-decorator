@@ -8,3 +8,11 @@ export function Subscribable(target: any, propertyKey: string, descriptor?: Prop
         PropertyDecorator(target, propertyKey);
     }
 }
+
+export function Subscribe(instance: any, propertyKey: string, cb: (value: any, args?: [any]) => void) {
+    if (!instance.hasOwnProperty('$$subscribers') || !instance.$$subscribers.hasOwnProperty(propertyKey)) {
+        throw new Error('This property is not subscribable');
+    }
+
+    instance.$$subscribers[propertyKey].push(cb);
+}

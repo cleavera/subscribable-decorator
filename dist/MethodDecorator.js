@@ -1,7 +1,10 @@
-"use strict";
 function MethodDecorator(target, propertyKey, descriptor) {
     'use strict';
-    var originalMethod = descriptor.value, subscribers = [];
+    if (!target.$$subscribers) {
+        target.$$subscribers = {};
+    }
+    target.$$subscribers[propertyKey] = [];
+    var originalMethod = descriptor.value;
     descriptor.configurable = true;
     descriptor.value = function () {
         var args = [];
@@ -11,23 +14,17 @@ function MethodDecorator(target, propertyKey, descriptor) {
         var returnValue;
         try {
             returnValue = originalMethod.apply(this, args);
-            subscribers.forEach(function (cb) {
+            target.$$subscribers[propertyKey].forEach(function (cb) {
                 cb(returnValue, args);
             });
         }
         catch (e) {
-            subscribers.forEach(function (cb) {
+            target.$$subscribers[propertyKey].forEach(function (cb) {
                 cb(e, args);
             });
             throw e;
         }
         return returnValue;
-    };
-    descriptor.value.$subscribe = function (cb) {
-        subscribers.push(cb);
-        return function () {
-            subscribers.slice(subscribers.indexOf(cb), 1);
-        };
     };
     descriptor.configurable = false;
 }

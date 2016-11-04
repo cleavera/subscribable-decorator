@@ -1,4 +1,4 @@
-import {Subscribable} from '../dist/index';
+import {Subscribable, Subscribe} from '../dist/index';
 
 class ExampleClass {
     constructor() {
@@ -18,11 +18,11 @@ class ExampleClass {
 
 var example = new ExampleClass();
 
-(<any>example).$subscribe.bool((...args) => {
+Subscribe(example, 'bool', (...args) => {
     console.log(args);
 });
 
-(<any>example.setBoolTrue).$subscribe((...args) => {
+Subscribe(example, 'setBoolTrue', (...args) => {
     console.log(args);
 });
 

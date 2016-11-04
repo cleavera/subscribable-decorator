@@ -1,4 +1,3 @@
-"use strict";
 var MethodDecorator_1 = require('./MethodDecorator');
 var PropertyDecorator_1 = require('./PropertyDecorator');
 function Subscribable(target, propertyKey, descriptor) {
@@ -10,3 +9,10 @@ function Subscribable(target, propertyKey, descriptor) {
     }
 }
 exports.Subscribable = Subscribable;
+function Subscribe(instance, propertyKey, cb) {
+    if (!instance.$$subscribers || !instance.$$subscribers.hasOwnProperty(propertyKey)) {
+        throw new Error('This property is not subscribable');
+    }
+    instance.$$subscribers[propertyKey].push(cb);
+}
+exports.Subscribe = Subscribe;
